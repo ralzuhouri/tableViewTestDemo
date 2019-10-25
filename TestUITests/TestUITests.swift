@@ -30,40 +30,37 @@ class TestUITests: XCTestCase {
     }
 
     func testNavigation() {
-        func testNavigation() {
-            // 1 - Hit the back button on the collapset master view - this works regardless of device iPad or iPhone
-            let masterButton = app.navigationBars.buttons.element(boundBy: 0)
-            if masterButton.exists {
-                masterButton.tap()
-                print("BACK TAPPED")
-            }
-            // 1a - Or just use the line below to rotate the view to landscape which will automatically show the master view
-            XCUIDevice.shared.orientation = UIDeviceOrientation.landscapeRight
-            
-            let complaintsTable = app.tables["ComplaintsTableView"]
-            XCTAssertTrue(complaintsTable.exists, "Table does not exist")
-            let complaintCell = complaintsTable.cells.firstMatch
-            XCTAssert(complaintCell.exists)
-            complaintCell.tap()
-            
-            XCTAssert(self.app.navigationBars["Complaint #100"].exists)
-            XCTAssertFalse(self.app.navigationBars["Complaint #99"].exists)
-
-            let editButton = self.app.buttons["editComplaint"]
-            XCTAssert(editButton.exists)
-            editButton.tap()
-
-            XCTAssert(self.app.navigationBars["Complaint #100"].exists)
-            XCTAssertFalse(self.app.navigationBars["Complaint #99"].exists)
-
-            let saveButton = self.app.buttons["Save"]
-            XCTAssert(saveButton.exists)
-            saveButton.tap()
-
-            let okButton = self.app.buttons["Ok"]
-            XCTAssert(okButton.exists)
-            okButton.tap()
+        // 1 - Hit the back button on the collapset master view - this works regardless of device iPad or iPhone
+        let masterButton = app.navigationBars.buttons.element(boundBy: 0)
+        if masterButton.exists {
+            masterButton.tap()
+            print("BACK TAPPED")
         }
+        // 1a - Or just use the line below to rotate the view to landscape which will automatically show the master view - uncomment the line below if you only need iPad specific testing
+//        XCUIDevice.shared.orientation = UIDeviceOrientation.landscapeRight
+        
+        let complaintsTable = app.tables["ComplaintsTableView"]
+        XCTAssertTrue(complaintsTable.exists, "Table does not exist")
+        let complaintCell = complaintsTable.cells.firstMatch
+        XCTAssert(complaintCell.exists)
+        complaintCell.tap()
+        
+        XCTAssert(self.app.navigationBars["Complaint #100"].exists)
+        XCTAssertFalse(self.app.navigationBars["Complaint #99"].exists)
+        
+        let editButton = self.app.buttons["editComplaint"]
+        XCTAssert(editButton.exists)
+        editButton.tap()
+        
+        XCTAssert(self.app.navigationBars["Complaint #100"].exists)
+        XCTAssertFalse(self.app.navigationBars["Complaint #99"].exists)
+        
+        let saveButton = self.app.buttons["Save"]
+        XCTAssert(saveButton.exists)
+        saveButton.tap()
+        
+        let okButton = self.app.buttons["Ok"]
+        XCTAssert(okButton.exists)
+        okButton.tap()
     }
-
 }
